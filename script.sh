@@ -2,7 +2,7 @@
 
 # Define the branch names
 main_branch="main"
-feature_branch="one"
+feature_branch="n1"
 
 # Merge the feature branch into the main branch
 git checkout $main_branch
