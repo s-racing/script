@@ -1,23 +1,18 @@
 #!/bin/bash
 
 # Define the name of the feature branch you want to monitor
-feature_branch="a"
+feature_branch="b"
 
 # Check if the feature branch is merged into the main branch
 if ! git branch --merged main | grep -q "$feature_branch"; then
   echo "Feature branch '$feature_branch' is not merged into main branch."
-  
-  # Perform any necessary actions to manually merge the feature branch into the main branch
-  # ...
 
+  # Prompt user to perform the manual merge
+  echo "Please manually merge the feature branch '$feature_branch' into the main branch."
+  echo "Press Enter to continue once the merge is complete..."
+  read -r
 
-  # Perform any necessary actions to manually merge the feature branch into the main branch
-  git checkout main
-  git merge "$feature_branch"
-  # Resolve merge conflicts if any
-  # ...
-
-  # After manually merging the feature branch into the main branch, proceed with the rest of the script
+  # After manual merge, proceed with the rest of the script
 
   # Change directory to the desired location
   cd /var/www/html
