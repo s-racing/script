@@ -1,35 +1,36 @@
 #!/bin/bash
 
-# Define the name of the feature branch you want to monitor
-feature_branch="b"
+# Define the name of the feature branch you want to merge
+feature_branch="a"
 
-# Check if the feature branch is merged into the main branch
-if ! git branch --merged main | grep -q "$feature_branch"; then
-  echo "Feature branch '$feature_branch' is not merged into main branch."
+# Change directory to the desired location
+cd /var/www/html
 
-  # Prompt user to perform the manual merge
-  echo "Please manually merge the feature branch '$feature_branch' into the main branch."
-  echo "Press Enter to continue once the merge is complete..."
-  read -r
+# Remove the existing index.html file
+sudo rm -f index.html
 
-  # After manual merge, proceed with the rest of the script
+# Change directory to the Jenkins workspace
+cd /var/lib/jenkins/workspace/new
 
-  # Change directory to the desired location
-  cd /var/www/html
+# Copy the files to the /var/www/html directory
+sudo cp -R * /var/www/html
 
-  # Remove the existing index.html file
-  sudo rm -f index.html
+# Perform the manual merge
+echo "Please manually merge the feature branch '$feature_branch' into the main branch."
 
-  # Change directory to the Jenkins workspace
-  cd /var/lib/jenkins/workspace/new
 
-  # Copy the files to the /var/www/html directory
-  sudo cp -R * /var/www/html
 
-  # Add any additional commands you want to execute after the merge
-  # ...
+# Change directory to the Jenkins workspace
+cd /var/lib/jenkins/workspace/new
 
-  echo "Post-merge script executed successfully!"
-else
-  echo "Feature branch '$feature_branch' is already merged into the main branch."
-fi
+# Copy the files to the /var/www/html directory
+sudo cp -R * /var/www/html
+
+
+# After merge, reflect the changes in the copied files
+cd /var/www/html
+
+# Add any additional commands to reflect the changes
+# ...
+
+echo "Post-merge script executed successfully!"
