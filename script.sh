@@ -1,10 +1,24 @@
 #!/bin/bash
 
 # Define the name of the feature branch you want to monitor
-feature_branch="n2"
+feature_branch="a"
 
-# Check if the merge was made from the specified feature branch to the main branch
-if [[ "$GIT_BRANCH" == "refs/heads/main" && "$GIT_HEAD_REF" == "refs/heads/$feature_branch" ]]; then
+# Check if the feature branch is merged into the main branch
+if ! git branch --merged main | grep -q "$feature_branch"; then
+  echo "Feature branch '$feature_branch' is not merged into main branch."
+  
+  # Perform any necessary actions to manually merge the feature branch into the main branch
+  # ...
+
+
+  # Perform any necessary actions to manually merge the feature branch into the main branch
+  git checkout main
+  git merge "$feature_branch"
+  # Resolve merge conflicts if any
+  # ...
+
+  # After manually merging the feature branch into the main branch, proceed with the rest of the script
+
   # Change directory to the desired location
   cd /var/www/html
 
@@ -21,4 +35,6 @@ if [[ "$GIT_BRANCH" == "refs/heads/main" && "$GIT_HEAD_REF" == "refs/heads/$feat
   # ...
 
   echo "Post-merge script executed successfully!"
+else
+  echo "Feature branch '$feature_branch' is already merged into the main branch."
 fi
