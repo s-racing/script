@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the name of the feature branch you want to monitor
-feature_branch="b"
+feature_branch="c"
 
 # Check if the feature branch is merged into the main branch
 if ! git branch --merged main | grep -q "$feature_branch"; then
